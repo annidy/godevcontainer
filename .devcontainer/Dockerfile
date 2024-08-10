@@ -1,1 +1,1 @@
-FROM qmcgaw/godevcontainer
+FROM annidy/godevcontainer

@@ -32,7 +32,7 @@ It works on Linux, Windows and OSX.
 You can make changes to the [Dockerfile](Dockerfile) and then rebuild the image. For example, your Dockerfile could be:
 
 ```Dockerfile
-FROM qmcgaw/godevcontainer
+FROM annidy/godevcontainer
 RUN apk add curl
 ```
 
@@ -47,7 +47,7 @@ You can customize **settings** and **extensions** in the [devcontainer.json](dev
 
 ### Entrypoint script
 
-You can bind mount a shell script to `/root/.welcome.sh` to replace the [current welcome script](https://github.com/qdm12/godevcontainer/blob/master/shell/.welcome.sh).
+You can bind mount a shell script to `/root/.welcome.sh` to replace the [current welcome script](https://github.com/annidy/godevcontainer/blob/master/shell/.welcome.sh).
 
 ### Publish a port
 
