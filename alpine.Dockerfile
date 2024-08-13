@@ -17,18 +17,18 @@ LABEL \
     org.opencontainers.image.source="https://github.com/annidy/godevcontainer" \
     org.opencontainers.image.title="Go Dev container Alpine" \
     org.opencontainers.image.description="Go development container for Visual Studio Code Remote Containers development"
-COPY --from=go /usr/local/go /usr/local/go
 ENV GOPATH=/go
 ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH \
     CGO_ENABLED=0 \
     GO111MODULE=on
 WORKDIR $GOPATH
+
+ENV GOPROXY=https://goproxy.cn,direct
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
 # Install Alpine packages (g++ for race testing)
 RUN apk add -q --update --progress --no-cache g++
-# Shell setup
-COPY shell/.zshrc-specific shell/.welcome.sh /root/
-
-ENV GOPROXY https://goproxy.cn,direct
 
 RUN go install -v github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest
 RUN go install -v github.com/ramya-rao-a/go-outline@latest
@@ -40,9 +40,9 @@ RUN go install -v github.com/go-delve/delve/cmd/dlv@latest
 RUN go install -v honnef.co/go/tools/cmd/staticcheck@latest
 RUN go install -v golang.org/x/tools/gopls@latest
 
-# Extra binary tools
-COPY --from=kubectl /bin /usr/local/bin/kubectl
-COPY --from=stern /bin /usr/local/bin/stern
-COPY --from=kubectx /bin /usr/local/bin/kubectx
-COPY --from=kubens /bin /usr/local/bin/kubens
-COPY --from=helm /bin /usr/local/bin/helm
+# # Extra binary tools
+# COPY --from=kubectl /bin /usr/local/bin/kubectl
+# COPY --from=stern /bin /usr/local/bin/stern
+# COPY --from=kubectx /bin /usr/local/bin/kubectx
+# COPY --from=kubens /bin /usr/local/bin/kubens
+# COPY --from=helm /bin /usr/local/bin/helm
