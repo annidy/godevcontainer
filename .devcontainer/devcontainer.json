@@ -8,7 +8,7 @@
         "vscode"
     ],
     "shutdownAction": "stopCompose",
-    "postCreateCommand": "~/.windows.sh && go mod download && go mod tidy",
+    "postCreateCommand": "go mod download && go mod tidy",
     "workspaceFolder": "/workspace",
     // "overrideCommand": "",
     "customizations": {
@@ -45,6 +45,9 @@
                 "go.useLanguageServer": true,
                 "go.testEnvVars": {
                     "CGO_ENABLED": "1"
+                },
+                "go.delveConfig": {
+                    "debugAdapter": "legacy",
                 },
                 "go.testFlags": [
                     "-v",
